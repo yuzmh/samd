@@ -1,0 +1,12 @@
+[package]
+name = "samd-wasm"
+version.workspace = true
+edition.workspace = true
+license-file.workspace = true
+readme.workspace = true
+keywords.workspace = true
+categories.workspace = true
+description = "Native no_std WebAssembly SIMD128 backend for SAMD."
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+samd-core.workspace = true

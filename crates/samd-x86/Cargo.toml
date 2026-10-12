@@ -1,0 +1,12 @@
+[package]
+name = "samd-x86"
+version.workspace = true
+edition.workspace = true
+license-file.workspace = true
+readme.workspace = true
+keywords.workspace = true
+categories.workspace = true
+description = "Native no_std x86_64 SIMD backends for SAMD."
+
+[dependencies]
+samd-core.workspace = true

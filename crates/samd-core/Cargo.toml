@@ -1,0 +1,12 @@
+[package]
+name = "samd-core"
+version.workspace = true
+edition.workspace = true
+license-file.workspace = true
+readme.workspace = true
+keywords.workspace = true
+categories.workspace = true
+description = "no_std SIMD traits, chunks, masks, and scalar vectors."
+
+[dependencies]
+libm.workspace = true

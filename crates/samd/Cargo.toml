@@ -1,0 +1,20 @@
+[package]
+name = "samd"
+version.workspace = true
+edition.workspace = true
+license-file.workspace = true
+readme.workspace = true
+keywords.workspace = true
+categories.workspace = true
+description = "Automatically dispatched portable SIMD kernels for Rust."
+
+[dependencies]
+samd-core.workspace = true
+samd-macros.workspace = true
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+samd-wasm.workspace = true
+
+[target.'cfg(target_arch = "x86_64")'.dependencies]
+samd-x86.workspace = true
+
