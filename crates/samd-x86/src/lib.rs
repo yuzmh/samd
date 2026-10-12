@@ -5,6 +5,8 @@
 use core::arch::asm;
 #[cfg(target_arch = "x86_64")]
 use core::arch::x86_64::{__cpuid, __cpuid_count};
+#[cfg(target_arch = "x86_64")]
+use core::sync::atomic::{AtomicU8, Ordering};
 
 #[cfg(target_arch = "x86_64")]
 pub mod avx2;
@@ -20,6 +22,9 @@ pub enum X86Backend {
     Sse2,
 }
 
+#[cfg(target_arch = "x86_64")]
+static DETECTED_BACKEND: AtomicU8 = AtomicU8::new(0);
+
 /// Detects the strongest implemented x86 backend available to this process.
 ///
 /// AVX2 selection checks CPU support, OSXSAVE, and XCR0 YMM state before it can
@@ -28,6 +33,23 @@ pub enum X86Backend {
 #[must_use]
 #[cfg(target_arch = "x86_64")]
 pub fn best_x86_backend() -> X86Backend {
+    match DETECTED_BACKEND.load(Ordering::Relaxed) {
+        1 => return X86Backend::Sse2,
+        2 => return X86Backend::Avx2,
+        _ => {}
+    }
+
+    let backend = detect_x86_backend();
+    let encoded = match backend {
+        X86Backend::Sse2 => 1,
+        X86Backend::Avx2 => 2,
+    };
+    let _ = DETECTED_BACKEND.compare_exchange(0, encoded, Ordering::Relaxed, Ordering::Relaxed);
+    backend
+}
+
+#[cfg(target_arch = "x86_64")]
+fn detect_x86_backend() -> X86Backend {
     let max_leaf = __cpuid(0).eax;
     if max_leaf < 1 {
         return X86Backend::Sse2;

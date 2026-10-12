@@ -6,11 +6,20 @@ license-file.workspace = true
 readme.workspace = true
 keywords.workspace = true
 categories.workspace = true
+repository.workspace = true
 description = "Automatically dispatched portable SIMD kernels for Rust."
 
 [dependencies]
 samd-core.workspace = true
 samd-macros.workspace = true
+
+[dev-dependencies]
+criterion.workspace = true
+pulp.workspace = true
+
+[[bench]]
+name = "bench"
+harness = false
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 samd-wasm.workspace = true

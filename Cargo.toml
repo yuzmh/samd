@@ -15,11 +15,14 @@ readme = "README.md"
 version = "0.1.0"
 keywords = ["simd", "no-std", "wasm"]
 categories = ["no-std", "wasm"]
+repository = "https://github.com/yuzmh/samd"
 
 [workspace.dependencies]
+criterion = "0.8.2"
 libm = { version = "0.2", default-features = false }
 proc-macro-crate = "3.5"
 proc-macro2 = "1.0"
+pulp = "0.22.3"
 quote = "1.0"
 samd-core = { path = "crates/samd-core", version = "0.1" }
 samd-macros = { path = "crates/samd-macros", version = "0.1" }

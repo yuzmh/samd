@@ -6,6 +6,7 @@ license-file.workspace = true
 readme.workspace = true
 keywords.workspace = true
 categories.workspace = true
+repository.workspace = true
 description = "Procedural attribute macro for SAMD SIMD kernels."
 
 [lib]

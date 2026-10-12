@@ -11,7 +11,10 @@ pub trait Element<S: Simd>: Copy {
     /// Every mapped vector supports addition, subtraction, safe chunk memory
     /// access, reductions, and comparisons through [`SimdVector`]. Additional
     /// operations are exposed only when that backend implements them.
-    type Vector: SimdVector<Self, S> + Add<Output = Self::Vector> + Sub<Output = Self::Vector>;
+    type Vector: SimdVector<Self, S>
+        + Add<Output = Self::Vector>
+        + Sub<Output = Self::Vector>
+        + Copy;
 
     /// Returns the physical lane count for this element and backend.
     ///
